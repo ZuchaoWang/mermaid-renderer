@@ -9,51 +9,27 @@
 </head>
 <body>
     <div class="container">
-        <h1>图表绘制器</h1>
+        <h1>Mermaid图表绘制器</h1>
         
-        <div class="note">
-            填入mermaid代码开始绘制
+        <div class="steps">
+            <div class="step">
+                <h3>第一步：将此提示词复制到你的AI模型中（比如DeepSeek），获得图表的Mermaid代码</h3>
+                <p><a href="./prompt.txt" target="_blank">点击查看提示词文件 →</a></p>
+            </div>
+            
+            <div class="step">
+                <h3>第二步：将AI模型生成的Mermaid代码填入此文本框中，点击开始绘制获得图表</h3>
+                <p><a href="#" onclick="loadExample(); return false;">点击加载示例代码（李宝宝诊疗时间线）→</a></p>
+            </div>
         </div>
         
-        <textarea id="mermaid-code" placeholder="在此输入mermaid代码...">
----
-config:
-    theme: forest
-    gantt:
-        barHeight: 28
-        barGap: 4
-        rightPadding: 16
----
-gantt
-    title 李宝宝 (NRDS) 诊疗时间线
-    dateFormat  YYYY-MM-DD
-    axisFormat  %m-%d
-    
-    section 呼吸支持
-    入院评估与稳定     :crit, a1, 2024-05-01, 2h
-    CPAP无创通气       :crit, a2, after a1, 41h
-    
-    section 药物治疗
-    抗生素(头孢噻肟)    :active, b1, 2024-05-01, 5d
-    全肠外营养(TPN)    :b2, 2024-05-02, 3d
-    光疗              :milestone, b3, 2024-05-05, 0h
-    
-    section 营养管理
-    微量肠内喂养       :c1, 2024-05-04, 1d
-    增加喂养至全量     :c2, after c1, 3d
-    
-    section 护理与教育
-    出院准备与家长教育 :d1, 2024-05-09, 1d
-    
-    section 关键节点
-    成功撤机 (CPAP)   :milestone, m1, 2024-05-03, 0h
-    停止TPN          :milestone, m2, 2024-05-05, 0h
-    停止抗生素        :milestone, m3, 2024-05-06, 0h
-    实现全量喂养      :milestone, m4, 2024-05-08, 0h
-    顺利出院         :milestone, m5, 2024-05-10, 0h
-        </textarea>
+        <textarea id="mermaid-code" placeholder="在此输入mermaid代码..."></textarea>
         
         <button onclick="renderChart()">生成图表</button>
+        
+        <div class="step">
+            <h3>第三步：如果绘制结果不满意，或者出现任何问题，继续和AI模型对话重新生成Mermaid代码</h3>
+        </div>
         
         <div id="chart-container">
             <div class="mermaid" id="mermaid-chart"></div>

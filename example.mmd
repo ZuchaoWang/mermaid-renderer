@@ -1,0 +1,35 @@
+---
+config:
+    theme: forest
+    gantt:
+        barHeight: 28
+        barGap: 4
+        rightPadding: 16
+---
+gantt
+    title 李宝宝 (NRDS) 诊疗时间线
+    dateFormat  YYYY-MM-DD
+    axisFormat  %m-%d
+    
+    section 呼吸支持
+    入院评估与稳定     :crit, a1, 2024-05-01, 2h
+    CPAP无创通气       :crit, a2, after a1, 41h
+    
+    section 药物治疗
+    抗生素(头孢噻肟)    :active, b1, 2024-05-01, 5d
+    全肠外营养(TPN)    :b2, 2024-05-02, 3d
+    光疗              :milestone, b3, 2024-05-05, 0h
+    
+    section 营养管理
+    微量肠内喂养       :c1, 2024-05-04, 1d
+    增加喂养至全量     :c2, after c1, 3d
+    
+    section 护理与教育
+    出院准备与家长教育 :d1, 2024-05-09, 1d
+    
+    section 关键节点
+    成功撤机 (CPAP)   :milestone, m1, 2024-05-03, 0h
+    停止TPN          :milestone, m2, 2024-05-05, 0h
+    停止抗生素        :milestone, m3, 2024-05-06, 0h
+    实现全量喂养      :milestone, m4, 2024-05-08, 0h
+    顺利出院         :milestone, m5, 2024-05-10, 0h
