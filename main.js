@@ -1,9 +1,9 @@
 // 初始化Mermaid
 mermaid.initialize({
-    startOnLoad: true,
+    startOnLoad: false,
     theme: 'default',
     fontFamily: 'Segoe UI, Microsoft YaHei, sans-serif',
-    fontSize: 16
+    fontSize: 14
 });
 
 // 加载示例代码函数
@@ -30,14 +30,16 @@ function renderChart() {
     const code = document.getElementById('mermaid-code').value;
     const chartElement = document.getElementById('mermaid-chart');
     
-    // 如果没有代码，清空图表
+    // 如果没有代码，清空图表但不显示错误
     if (!code.trim()) {
-        chartElement.innerHTML = '<div style="color: #666; padding: 20px; text-align: center;">请输入Mermaid代码后点击生成图表</div>';
+        chartElement.innerHTML = '';
+        chartElement.className = ''; // 移除mermaid类
         return;
     }
     
     // 清除现有图表
     chartElement.removeAttribute('data-processed');
+    chartElement.className = 'mermaid'; // 添加mermaid类
     chartElement.innerHTML = code;
     
     // 重新渲染
@@ -51,8 +53,8 @@ function renderChart() {
 
 // 监听窗口大小变化，重新渲染图表以适应新尺寸
 window.addEventListener('resize', function() {
-    renderChart();
+    const code = document.getElementById('mermaid-code').value;
+    if (code.trim()) {
+        renderChart();
+    }
 });
-
-// 初始化显示默认消息
-renderChart();

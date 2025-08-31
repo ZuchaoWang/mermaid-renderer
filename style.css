@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-    margin: 32px;
+    margin: 20px;
     color: #333;
     background-color: #f8f9fa;
 }
@@ -8,14 +8,14 @@ body {
 .container {
     background-color: white;
     border-radius: 8px;
-    padding: 24px;
+    padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     margin-top: 0;
-    margin-bottom: 16px;
-    font-size: 24px;
+    margin-bottom: 12px;
+    font-size: 22px;
 }
 
 .note {
@@ -25,12 +25,12 @@ h1 {
 }
 
 .steps {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .step {
-    margin-bottom: 16px;
-    padding: 16px;
+    margin-bottom: 12px;
+    padding: 12px;
     background-color: #f8f9fa;
     border-radius: 6px;
     border-left: 4px solid #3498db;
@@ -59,8 +59,8 @@ h1 {
 
 textarea {
     width: 100%;
-    height: 200px;
-    padding: 12px;
+    height: 180px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-family: 'Consolas', 'Monaco', monospace;
@@ -73,11 +73,12 @@ button {
     background-color: #3498db;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     transition: background-color 0.3s;
 }
 
@@ -86,12 +87,12 @@ button:hover {
 }
 
 #chart-container {
-    margin-top: 24px;
+    margin-top: 20px;
     width: 100%;
     overflow: auto;
 }
 
 .mermaid {
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
 }

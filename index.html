@@ -13,7 +13,7 @@
         
         <div class="steps">
             <div class="step">
-                <h3>第一步：将此提示词复制到你的AI模型中（比如DeepSeek），获得图表的Mermaid代码</h3>
+                <h3>第一步：将此提示词复制到你的AI模型中（比如DeepSeek），并告诉它你的需求，直到获得图表的Mermaid代码</h3>
                 <p><a href="./prompt.txt" target="_blank">点击查看提示词文件 →</a></p>
             </div>
             
@@ -27,12 +27,12 @@
         
         <button onclick="renderChart()">生成图表</button>
         
-        <div class="step">
-            <h3>第三步：如果绘制结果不满意，或者出现任何问题，继续和AI模型对话重新生成Mermaid代码</h3>
+        <div id="chart-container">
+            <div id="mermaid-chart"></div>
         </div>
         
-        <div id="chart-container">
-            <div class="mermaid" id="mermaid-chart"></div>
+        <div class="step">
+            <h3>第三步：如果绘制结果不满意，或者出现任何问题，继续和AI模型对话重新生成Mermaid代码</h3>
         </div>
     </div>
 
