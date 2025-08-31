@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid图表绘制器</title>
+    <script src="./mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            margin: 32px;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        .note {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 16px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 12px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #chart-container {
+            margin-top: 24px;
+            width: 100%;
+            overflow: auto;
+        }
+        .mermaid {
+            font-size: 16px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>图表绘制器</h1>
+        
+        <div class="note">
+            填入mermaid代码开始绘制
+        </div>
+        
+        <textarea id="mermaid-code" placeholder="在此输入mermaid代码...">
+gantt
+    title 示例图表
+    dateFormat YYYY-MM-DD
+    axisFormat %m-%d
+    
+    section 任务组A
+    任务一 :a1, 2024-05-01, 2d
+    任务二 :after a1, 3d
+    
+    section 任务组B
+    任务三 :2024-05-02, 4d
+        </textarea>
+        
+        <button onclick="renderChart()">生成图表</button>
+        
+        <div id="chart-container">
+            <div class="mermaid" id="mermaid-chart"></div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            fontFamily: 'Segoe UI, Microsoft YaHei, sans-serif',
+            fontSize: 16
+        });
+        
+        // 初始渲染示例图表
+        renderChart();
+        
+        // 渲染图表函数
+        function renderChart() {
+            const code = document.getElementById('mermaid-code').value;
+            const chartElement = document.getElementById('mermaid-chart');
+            
+            // 清除现有图表
+            chartElement.removeAttribute('data-processed');
+            chartElement.innerHTML = code;
+            
+            // 重新渲染
+            try {
+                mermaid.init(undefined, '#mermaid-chart');
+            } catch (error) {
+                chartElement.innerHTML = '<div style="color: red; padding: 20px; text-align: center;">' +
+                                         '图表渲染错误: ' + error.message + '</div>';
+            }
+        }
+        
+        // 监听窗口大小变化，重新渲染图表以适应新尺寸
+        window.addEventListener('resize', function() {
+            renderChart();
+        });
+    </script>
+</body>
+</html>
