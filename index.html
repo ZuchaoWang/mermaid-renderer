@@ -4,65 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mermaid图表绘制器</title>
+    <link rel="stylesheet" href="style.css">
     <script src="./mermaid.min.js"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            margin: 32px;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-        .container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 24px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            margin-top: 0;
-            margin-bottom: 16px;
-            font-size: 24px;
-        }
-        .note {
-            margin-bottom: 20px;
-            color: #666;
-            font-size: 16px;
-        }
-        textarea {
-            width: 100%;
-            height: 200px;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 14px;
-            resize: vertical;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 12px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        #chart-container {
-            margin-top: 24px;
-            width: 100%;
-            overflow: auto;
-        }
-        .mermaid {
-            font-size: 16px;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -73,17 +16,41 @@
         </div>
         
         <textarea id="mermaid-code" placeholder="在此输入mermaid代码...">
+---
+config:
+    theme: forest
+    gantt:
+        barHeight: 28
+        barGap: 4
+        rightPadding: 16
+---
 gantt
-    title 示例图表
-    dateFormat YYYY-MM-DD
-    axisFormat %m-%d
+    title 李宝宝 (NRDS) 诊疗时间线
+    dateFormat  YYYY-MM-DD
+    axisFormat  %m-%d
     
-    section 任务组A
-    任务一 :a1, 2024-05-01, 2d
-    任务二 :after a1, 3d
+    section 呼吸支持
+    入院评估与稳定     :crit, a1, 2024-05-01, 2h
+    CPAP无创通气       :crit, a2, after a1, 41h
     
-    section 任务组B
-    任务三 :2024-05-02, 4d
+    section 药物治疗
+    抗生素(头孢噻肟)    :active, b1, 2024-05-01, 5d
+    全肠外营养(TPN)    :b2, 2024-05-02, 3d
+    光疗              :milestone, b3, 2024-05-05, 0h
+    
+    section 营养管理
+    微量肠内喂养       :c1, 2024-05-04, 1d
+    增加喂养至全量     :c2, after c1, 3d
+    
+    section 护理与教育
+    出院准备与家长教育 :d1, 2024-05-09, 1d
+    
+    section 关键节点
+    成功撤机 (CPAP)   :milestone, m1, 2024-05-03, 0h
+    停止TPN          :milestone, m2, 2024-05-05, 0h
+    停止抗生素        :milestone, m3, 2024-05-06, 0h
+    实现全量喂养      :milestone, m4, 2024-05-08, 0h
+    顺利出院         :milestone, m5, 2024-05-10, 0h
         </textarea>
         
         <button onclick="renderChart()">生成图表</button>
@@ -93,40 +60,6 @@ gantt
         </div>
     </div>
 
-    <script>
-        // 初始化Mermaid
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
-            fontFamily: 'Segoe UI, Microsoft YaHei, sans-serif',
-            fontSize: 16
-        });
-        
-        // 初始渲染示例图表
-        renderChart();
-        
-        // 渲染图表函数
-        function renderChart() {
-            const code = document.getElementById('mermaid-code').value;
-            const chartElement = document.getElementById('mermaid-chart');
-            
-            // 清除现有图表
-            chartElement.removeAttribute('data-processed');
-            chartElement.innerHTML = code;
-            
-            // 重新渲染
-            try {
-                mermaid.init(undefined, '#mermaid-chart');
-            } catch (error) {
-                chartElement.innerHTML = '<div style="color: red; padding: 20px; text-align: center;">' +
-                                         '图表渲染错误: ' + error.message + '</div>';
-            }
-        }
-        
-        // 监听窗口大小变化，重新渲染图表以适应新尺寸
-        window.addEventListener('resize', function() {
-            renderChart();
-        });
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
